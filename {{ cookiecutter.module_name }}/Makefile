@@ -5,9 +5,8 @@ include ultra.mk
 MAIN_MODULE := {{ cookiecutter.module_name }}
 {% endif -%}
 REQUIREMENTS := development
-VENV := .venv
-
 PYTHON := $(PYTHON{{ cookiecutter.python_version.split('.')[0] }})
+VENV := .venv
 
 # Python 2 prints versions to stderr, so instead of simply checking to
 # see if there is stdout, we use && to check the error code.
