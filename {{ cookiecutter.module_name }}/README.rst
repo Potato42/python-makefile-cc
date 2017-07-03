@@ -30,9 +30,11 @@ Recommended usage instructions using ``make`` and ``vex``.
 
    .. code:: shell
 
+       {% if cookiecutter.runnable.lower().startswith('y') -%}
        # Run the project
        make run
 
+       {% endif -%}
        # Run tests
        make test
 

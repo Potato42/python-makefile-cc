@@ -1,6 +1,9 @@
 include ultra.mk
 
+{% set has_run = cookiecutter.runnable.lower().startswith('y') -%}
+{% if has_run -%}
 MAIN_MODULE := {{ cookiecutter.module_name }}
+{% endif -%}
 REQUIREMENTS := development
 VENV := .venv
 
@@ -28,7 +31,9 @@ help: ; @:
 	$(info make init                 Initialize venv with $(PYTHON))
 	$(info $()                          NOTE: $(PYTHON) is $(PYVERSION))
 	$(info make init PYTHON=pythonX  Initialize venv with pythonX)
+	{% if has_run -%}
 	$(info make run                  Run $(MAIN_MODULE))
+	{% endif -%}
 	$(info make test                 Run unit tests)
 	$(info make shell                Start a venv shell)
 	$(info make clean                Delete venv and cache files)
@@ -42,27 +47,34 @@ init $(VENV): | _inve
 	$(info Creating $(abspath $(VENV)) ($(PYVERSION)))
 	$(PYTHON) -m venv "$(VENV)"
 	$(INVE) pip install -r "requirements/$(REQUIREMENTS).pip"
+.PHONY: init
 
 # Ensure the $(INVE) command exists, installing vex if needed
 _inve:
 	$(if $(call eq,vex,$(firstword $(INVE))),\
         @vex --version > $(NULL) || $(PYTHON) -m pip install vex)
+.PHONY: _inve
 
 # Ensure the $(INVE) command is usable (has venv)
 inve: _inve $(VENV)
+.PHONY: inve
 
 shell dev: inve
 	$(INVE)
+.PHONY: shell dev
 
+{% if has_run -%}
 run: inve
 	$(INVE) python -m "$(MAIN_MODULE)"
+.PHONY: run
 
+{% endif -%}
 test: inve
 	$(error TODO: implement tests!)
+.PHONY: test
 
 clean deinit:
 	-$(call recrm,.venv)
 	-$(call recrm,$(wildcard *.egg-info))
 	-$(call recrm,$(call recsearch,.,%/__pycache__))
-
-.PHONY: help init _inve inve shell dev run test clean deinit
+.PHONY: clean deinit
