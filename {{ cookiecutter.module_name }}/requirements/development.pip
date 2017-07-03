@@ -1,0 +1,2 @@
+-r core.pip
+--editable .

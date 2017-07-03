@@ -1,0 +1,8 @@
+"""
+Main entry point of {{ cookiecutter.module_name }}
+"""
+
+import sys
+
+print('Hello, world!')
+print('sys.path:', sys.path)

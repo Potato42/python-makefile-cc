@@ -1,0 +1,8 @@
+{
+    "module_name": "myproject",
+    "runnable": "y",
+    "version": "0.0.0",
+    "full_name": "My Name",
+    "python_version": "3",
+    "open_source_license": ["MIT", "Unlicense", "LGPLv3", "Non-Open"]
+}
