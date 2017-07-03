@@ -14,14 +14,14 @@ Options
     module names should be short, all lowercase, and the use of
     underscores is discouraged.
 
+- | ``full_name``
+  | Full name of the project author.
+
 - | ``runnable``
   | Should be yes if the project has a main entry point.
 
 - | ``version``
   | Initial version of the project.
-
-- | ``full_name``
-  | Full name of the project author.
 
 - | ``python_version``
   | The best supported Python version for the project.  A minor version
