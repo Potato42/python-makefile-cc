@@ -1,4 +1,5 @@
 # Some cross-platform makefile utilities
+# See https://github.com/Potato42/python-makefile-cc
 
 ifeq ($(OS), Windows_NT)
 	canonicalize = $(subst /,\,$1)
